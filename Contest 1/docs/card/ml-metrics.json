@@ -1,0 +1,8 @@
+{
+  "_comment": "This JSON file containing the ml-metrics",
+  "Name": "Suhani Panda, Chandan Kumar, Deeptanshu Bhattacharya, Agamdeep Singh",
+  "Team Name": "TeamX",
+  "f1 scores": {
+    0.9655
+  }
+}
