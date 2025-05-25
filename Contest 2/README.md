@@ -5,10 +5,6 @@ Team Members: Suhani Panda, Agamdeep Singh, Deeptanshu Bhattacharya, Chandan Kum
 
 Binary classifier for Kaggle's "Soil Classification Part 2" competition
 
-## Team
-- Team Name: SoilClassifiers
-- Kaggle Username: [YOUR_USERNAME]
-
 ## Installation
 ```bash
 git clone https://github.com/yourusername/soil-classification.git
