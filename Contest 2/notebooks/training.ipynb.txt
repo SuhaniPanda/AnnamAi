@@ -1,0 +1,64 @@
+"""
+Soil Classification Model Training Notebook
+Team: SoilClassifiers
+Kaggle Competition: Soil Classification Part 2
+"""
+
+# Import dependencies
+%load_ext autoreload
+%autoreload 2
+
+import os
+import torch
+from src.preprocessing import SoilImageDataset, SyntheticNegativeGenerator
+from src.postprocessing import evaluate_model, print_epoch_stats
+from src.model import SoilClassifier
+from torch.utils.data import DataLoader
+import albumentations as A
+from albumentations.pytorch import ToTensorV2
+from tqdm import tqdm
+
+# Configuration
+class Config:
+    DATA_DIR = "/kaggle/input/soil-classification-part-2/soil_competition-2025"
+    BATCH_SIZE = 32
+    IMG_SIZE = 256
+    EPOCHS = 30
+    LR = 1e-4
+    SEED = 42
+
+cfg = Config()
+
+# Initialize
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+torch.manual_seed(cfg.SEED)
+
+# Data loading
+train_df = pd.read_csv(os.path.join(cfg.DATA_DIR, "train_labels.csv"))
+train_df['label'] = 1  # All are positive samples
+
+# Dataset and DataLoader
+train_aug = A.Compose([...])  # Same as in original code
+neg_gen = SyntheticNegativeGenerator(os.path.join(cfg.DATA_DIR, "train"))
+train_set = SoilImageDataset(train_df, os.path.join(cfg.DATA_DIR, "train"), 
+                           transform=train_aug, neg_generator=neg_gen)
+train_loader = DataLoader(train_set, batch_size=cfg.BATCH_SIZE, shuffle=True)
+
+# Model setup
+model = SoilClassifier().to(device)
+optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.LR)
+criterion = nn.BCEWithLogitsLoss()
+
+# Training loop
+for epoch in range(cfg.EPOCHS):
+    model.train()
+    for images, labels in tqdm(train_loader):
+        # Training steps...
+        pass
+    
+    # Validation and logging
+    val_metrics = evaluate_model(model, val_loader)
+    print_epoch_stats(epoch, train_loss, val_metrics)
+
+# Save model
+torch.save(model.state_dict(), 'soil_classifier.pth')

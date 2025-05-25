@@ -1,0 +1,37 @@
+"""
+Soil Classification Inference Notebook
+Team: SoilClassifiers
+"""
+
+import os
+import torch
+from src.model import SoilClassifier
+from src.postprocessing import predict_with_augmentation
+from PIL import Image
+import pandas as pd
+
+# Configuration
+DATA_DIR = "/kaggle/input/soil-classification-part-2/soil_competition-2025"
+MODEL_PATH = "soil_classifier.pth"
+THRESHOLD = 0.95
+
+# Load model
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = SoilClassifier().to(device)
+model.load_state_dict(torch.load(MODEL_PATH))
+model.eval()
+
+# Load test data
+test_df = pd.read_csv(os.path.join(DATA_DIR, "test_ids.csv"))
+predictions = []
+
+# Inference loop
+for _, row in test_df.iterrows():
+    img_path = os.path.join(DATA_DIR, "test", row['image_id'])
+    img = Image.open(img_path).convert('RGB')
+    prob = predict_with_augmentation(model, img)
+    pred = 1 if prob > THRESHOLD else 0
+    predictions.append((row['image_id'], pred))
+
+# Create submission
+pd.DataFrame(predictions, columns=['image_id', 'label']).to_csv("submission.csv", index=False)

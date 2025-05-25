@@ -1,0 +1,15 @@
+# Annam.Ai Kaggle Contest
+Team Members: Suhani Panda, Agamdeep Singh, Deeptanshu Bhattacharya, Chandan Kumar
+# Soil Classification System
+
+Binary classifier for Kaggle's "Soil Classification Part 2" competition
+
+## Team
+- Team Name: SoilClassifiers
+- Kaggle Username: [YOUR_USERNAME]
+
+## Installation
+```bash
+git clone https://github.com/yourusername/soil-classification.git
+cd AnnamAi
+pip install -r requirements.txt

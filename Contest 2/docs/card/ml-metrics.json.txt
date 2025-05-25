@@ -1,0 +1,9 @@
+{
+  "_comment": "This JSON file containing the ml-metrics",
+  "Name": "Suhani Panda, Chandan Kumar, Deeptanshu Bhattacharya, Agamdeep Singh",
+  "Kaggle Username": "annam.ai",
+  "Team Name": "soilclassifiers",
+  "f1 scores": {
+    0.9852
+  }
+}
