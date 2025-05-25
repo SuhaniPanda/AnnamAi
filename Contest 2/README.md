@@ -1,4 +1,4 @@
-# Annam.Ai Kaggle Contest
+# Annam.Ai Kaggle Contest 2
 Team Name: TeamX
 Team Members: Suhani Panda, Agamdeep Singh, Deeptanshu Bhattacharya, Chandan Kumar
 # Soil Classification System
